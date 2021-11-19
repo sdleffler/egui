@@ -327,13 +327,15 @@ impl Memory {
         self.interaction.focus.id
     }
 
-    pub(crate) fn lock_focus(&mut self, id: Id, lock_focus: bool) {
+    /// If this widget has focus, lock it.
+    pub fn lock_focus(&mut self, id: Id, lock_focus: bool) {
         if self.had_focus_last_frame(id) && self.has_focus(id) {
             self.interaction.focus.is_focus_locked = lock_focus;
         }
     }
 
-    pub(crate) fn has_lock_focus(&mut self, id: Id) -> bool {
+    /// Returns true if this widget is focus-locked.
+    pub fn has_lock_focus(&mut self, id: Id) -> bool {
         if self.had_focus_last_frame(id) && self.has_focus(id) {
             self.interaction.focus.is_focus_locked
         } else {
